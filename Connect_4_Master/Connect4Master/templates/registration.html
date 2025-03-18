@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 300px; /* Reduced width */
+            width: 100%;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 15px;
+            font-size: 18px; /* Reduced font size */
+        }
+        .messages {
+            margin-bottom: 10px;
+        }
+        .message {
+            padding: 8px;
+            border-radius: 4px;
+            margin-bottom: 8px;
+            font-size: 12px; /* Reduced font size */
+        }
+        .message.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .message.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .form-group {
+            margin-bottom: 12px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 12px; /* Reduced label font size */
+        }
+        input[type="text"], input[type="email"], input[type="password"], input[type="tel"] {
+            width: 100%;
+            padding: 8px; /* Reduced padding */
+            margin: 5px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 12px; /* Reduced input font size */
+        }
+        button {
+            width: 100%;
+            padding: 8px; /* Reduced button height */
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-bottom: 8px; /* Reduced margin */
+            font-size: 14px; /* Reduced button font size */
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .login-btn {
+            background-color: #008CBA;
+        }
+        .login-btn:hover {
+            background-color: #007B9E;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Register</h2>
+
+    <!-- Display success and error messages -->
+    <div class="messages">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="message {% if message.tags %}{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <!-- Render form -->
+    <form method="post" action="{% url 'register_view' %}">
+        {% csrf_token %}
+        <div class="form-group">
+            {{ form.username.label_tag }} {{ form.username }}
+            {% if form.username.errors %}
+                <div class="message error">{{ form.username.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.first_name.label_tag }} {{ form.first_name }}
+            {% if form.first_name.errors %}
+                <div class="message error">{{ form.first_name.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.last_name.label_tag }} {{ form.last_name }}
+            {% if form.last_name.errors %}
+                <div class="message error">{{ form.last_name.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.mobile.label_tag }} {{ form.mobile }}
+            {% if form.mobile.errors %}
+                <div class="message error">{{ form.mobile.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.email.label_tag }} {{ form.email }}
+            {% if form.email.errors %}
+                <div class="message error">{{ form.email.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.password1.label_tag }} {{ form.password1 }}
+            {% if form.password1.errors %}
+                <div class="message error">{{ form.password1.errors }}</div>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.password2.label_tag }} {{ form.password2 }}
+            {% if form.password2.errors %}
+                <div class="message error">{{ form.password2.errors }}</div>
+            {% endif %}
+        </div>
+        <button type="submit">Register</button>
+    </form>
+
+    <!-- Extra button for login -->
+    <button class="login-btn" onclick="window.location.href='{% url 'login_view' %}'">Login</button>
+</div>
+
+</body>
+</html>

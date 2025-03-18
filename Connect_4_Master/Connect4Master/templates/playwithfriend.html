@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connect Four</title>
+    <style>
+        * {
+            border: 0;
+            padding: 0;
+        }
+        #game-board {
+            background: #0074B3;
+            width: 730px;
+            cursor: pointer;
+        }
+        .column {
+            width: 100px;
+            display: inline-block;
+        }
+        .column:hover circle.free {
+            fill: #D5E4ED;
+        }
+        circle.free {
+            fill: #fff;
+        }
+        circle.red {
+            fill: #D50000;
+        }
+        circle.yellow {
+            fill: #DAD400;
+        }
+        body {
+            background-color: rgb(21, 2, 2);
+        }
+        .game_board {
+            margin-top: 10%;
+            margin-left: 15%;
+        }
+        a{ 
+          
+          text-decoration: none;
+          
+          margin-inline-end: 10%;
+          padding: 10px;
+          background-color: #0074B3;
+          color: white;
+          border: none;
+          cursor: pointer;
+        }
+        #start-game {
+            margin: 20px;
+            padding: 10px;
+            background-color: #0074B3;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        @media screen and (max-width:750px) {
+
+
+
+              #game-board {
+               
+                width: 270px;
+                height: 250px;
+
+                
+              }
+              
+              /* Style for each column */
+              .column {
+            
+                width: 30px; /* Width of each column */
+
+              
+              }
+              
+              /* Style for each SVG element */
+              svg {
+               
+                width: 30px; /* Width of each SVG */
+                height: 30px; /* Height of each SVG */
+                viewBox: 0 0 100 100; /* Ensure circles fit properly */
+                overflow: visible; /* Make sure circles are not clipped */
+              }
+              
+              /* Style for circles inside SVG */
+              circle {
+                cx: 30; /* Center X position */
+                cy: 30; /* Center Y position */
+                r: 10; /* Radius of circles */
+                stroke: #0B4E72;
+                stroke-width: 3px; /* Adjust stroke width */
+              }
+
+
+
+
+
+        }
+
+        
+    </style>
+</head>
+<body>
+
+      
+  <a href="{% url 'playwithfriend' %}">Restart</a>   
+    <div class="game_board">
+        <button id="start-game" >Start Game</button>
+        <div id="timer">Time left: 10s</div>
+
+        <br>
+        
+        <div id="game-board" style="display: none;">
+            <div class="column" id="column-0" data-x="0">
+                <svg height="100" width="100" class="row-5">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-4">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-3">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-2">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-1">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-0">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+            </div>
+
+            <div class="column"  id="column-1" data-x="1">
+                <svg height="100" width="100" class="row-5">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-4">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-3">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-2">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-1">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-0">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+            </div>
+            <div class="column" id="column-2" data-x="2">
+                <svg height="100" width="100" class="row-5">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-4">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-3">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-2">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-1">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-0">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+            </div>
+            <div class="column" id="column-3" data-x="3">
+                <svg height="100" width="100" class="row-5">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-4">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-3">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-2">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-1">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-0">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+            </div>
+            <div class="column" id="column-4" data-x="4">
+                <svg height="100" width="100" class="row-5">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-4">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-3">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-2">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-1">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-0">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+            </div>
+            <div class="column" id="column-5" data-x="5">
+                <svg height="100" width="100" class="row-5">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-4">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-3">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-2">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-1">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-0">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+            </div>
+            <div class="column" id="column-6" data-x="6">
+                <svg height="100" width="100" class="row-5">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-4">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-3">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-2">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-1">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+                <svg height="100" width="100" class="row-0">
+                  <circle cx="50" cy="50" r="40" stroke="#0B4E72" stroke-width="3" class="free" />
+                </svg> 
+            </div>
+        </div>
+           
+        
+    </div>
+
+    <script>
+      (function() {
+        var ConnectFour = function() {
+            var gameBoard = {};
+            var currentPlayer = 'red';
+            var numRows = 6;
+            var numCols = 7;
+            var numTurns = 0;
+            var timer; // Reference to the timer
+            var timeLeft = 10; // 4 seconds for each player to make a move
+    
+            var _init = function() {
+                var columns = document.querySelectorAll('.column');
+                Array.prototype.forEach.call(columns, function(col) {
+                    col.addEventListener('click', function() {
+                        clearInterval(timer); // Stop the timer when the player clicks
+                        markNextFree(col.getAttribute('data-x'));
+                    });
+                });
+    
+                for (var x = 0; x < numCols; x++) {
+                    gameBoard[x] = {};
+                    for (var y = 0; y < numRows; y++) {
+                        gameBoard[x][y] = 'free';
+                    }
+                }
+    
+                startTimer(); // Start the timer when the game initializes
+            };
+    
+            var startTimer = function() {
+                timeLeft = 10;
+                document.getElementById('timer').innerText = `Time left: ${timeLeft}s`;
+    
+                timer = setInterval(function() {
+                    timeLeft--;
+                    document.getElementById('timer').innerText = `Time left: ${timeLeft}s`;
+    
+                    if (timeLeft <= 0) {
+                        clearInterval(timer);
+                        alert('Time up! You lose your turn.');
+                        switchPlayer();
+                        startTimer(); // Start the timer for the next player
+                    }
+                }, 1000);
+            };
+    
+            var markNextFree = function(x) {
+                var nextY = false;
+    
+                for (var y = 0; y < numRows; y++) {
+                    if (gameBoard[x][y] === 'free') {
+                        nextY = y;
+                        break;
+                    }
+                }
+    
+                if (nextY === false) {
+                    alert('No free spaces in this column. Try another.');
+                    return false;
+                }
+    
+                // Update the game board and fill the circle with the current player's color
+                gameBoard[x][nextY] = currentPlayer;
+                var circle = document.querySelector('#column-' + x + ' .row-' + nextY + ' circle');
+                circle.setAttribute('class', currentPlayer);
+    
+                // Ensure the color is filled before checking for a winner
+                setTimeout(function() {
+                    if (isWinner(parseInt(x), nextY)) {
+                        alert(currentPlayer + ' wins!');
+                        clearBoard();
+                        return true;
+                    }
+    
+                    numTurns += 1;
+    
+                    if (numTurns >= numRows * numCols) {
+                        alert('It\'s a tie!');
+                        clearBoard();
+                        return true;
+                    }
+    
+                    switchPlayer();
+                    startTimer(); // Restart the timer for the next player
+                }, 50); // Short delay to allow for rendering
+            };
+    
+            var clearBoard = function() {
+                clearInterval(timer); // Stop the timer when the game ends
+                Array.prototype.forEach.call(document.querySelectorAll('circle'), function(piece) {
+                    piece.setAttribute('class', 'free');
+                });
+    
+                gameBoard = {};
+    
+                for (var x = 0; x < numCols; x++) {
+                    gameBoard[x] = {};
+                    for (var y = 0; y < numRows; y++) {
+                        gameBoard[x][y] = 'free';
+                    }
+                }
+    
+                numTurns = 0;
+    
+                return gameBoard;
+            };
+    
+            var switchPlayer = function() {
+                currentPlayer = currentPlayer === 'red' ? 'yellow' : 'red';
+            };
+    
+            var isWinner = function(currentX, currentY) {
+                return checkDirection(currentX, currentY, 'horizontal') ||
+                       checkDirection(currentX, currentY, 'vertical') ||
+                       checkDirection(currentX, currentY, 'diagonalLeft') ||
+                       checkDirection(currentX, currentY, 'diagonalRight');
+            };
+    
+            var isBounds = function(x, y) {
+                return (gameBoard.hasOwnProperty(x) && typeof gameBoard[x][y] !== 'undefined');
+            };
+    
+            var checkDirection = function(currentX, currentY, direction) {
+                var chainLength = 1;
+                var directions = {
+                    horizontal: [[0, -1], [0, 1]],
+                    vertical: [[1, 0], [-1, 0]],
+                    diagonalLeft: [[1, 1], [-1, -1]], // Bottom-left to top-right
+                    diagonalRight: [[1, -1], [-1, 1]] // Bottom-right to top-left
+                };
+    
+                directions[direction].forEach(function(coords) {
+                    var i = 1;
+                    while (isBounds(currentX + (coords[0] * i), currentY + (coords[1] * i)) &&
+                           (gameBoard[currentX + (coords[0] * i)][currentY + (coords[1] * i)] === currentPlayer)) {
+                        chainLength += 1;
+                        i += 1;
+                    }
+                });
+    
+                return (chainLength >= 4);
+            };
+    
+            _init();
+        };
+    
+        var startGame = function() {
+            var userChoice = prompt("Choose heads or tails:");
+            if (userChoice !== 'heads' && userChoice !== 'tails') {
+                alert("Invalid choice. Please choose heads or tails.");
+                return;
+            }
+    
+            var coinToss = Math.random() < 0.5 ? 'heads' : 'tails';
+            var resultMessage = "Coin toss result: " + coinToss + ". ";
+    
+            if (userChoice === coinToss) {
+                resultMessage += "You won the toss! Choose your color (red or yellow):";
+                var userColor = prompt(resultMessage);
+                if (userColor !== 'red' && userColor !== 'yellow') {
+                    alert("Invalid color. Defaulting to red.");
+                    userColor = 'red';
+                }
+                currentPlayer = userColor;
+            } else {
+                resultMessage += "You lost the toss. The opponent will start the game with color red";
+                alert(resultMessage);
+                currentPlayer = 'red'; // default to red if the user loses the toss
+            }
+    
+            document.getElementById('game-board').style.display = 'block';
+        };
+    
+        document.getElementById('start-game').addEventListener('click', startGame);
+    
+        ConnectFour();
+    })();
+    </script>
+    
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
